@@ -50,7 +50,7 @@ step "deploy-container" {
         worker_pool = "hosted-ubuntu"
 
         container {
-            feed = "container-images"
+            feed = "docker-hub"
             image = "octopuslabs/k8s-workertools"
         }
 
@@ -124,7 +124,7 @@ step "smoke-test" {
         worker_pool = "hosted-ubuntu"
 
         container {
-            feed = "container-images"
+            feed = "docker-hub"
             image = "octopuslabs/k8s-workertools"
         }
     }
