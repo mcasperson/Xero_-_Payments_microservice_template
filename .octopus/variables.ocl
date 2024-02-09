@@ -78,7 +78,7 @@ variable "AWS.Account" {
     value "aws-account" {}
 }
 
-variable "Octopus.Project.Name" {
+variable "Octopus.NewProject.Name" {
     value "#{Octopus.Project.Name}" {
         process = ["runbook/2-fork-and-deploy-project"]
 
