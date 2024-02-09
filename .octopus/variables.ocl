@@ -71,3 +71,9 @@ variable "Microservice.Name" {
         description = "The microservice name, which is used as the basis for K8s resources and networking paths"
     }
 }
+
+variable "Private.AWS.Account" {
+    type = "AmazonWebServicesAccount"
+
+    value "aws-account" {}
+}
