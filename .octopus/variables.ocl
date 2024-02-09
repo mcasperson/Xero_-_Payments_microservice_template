@@ -4,12 +4,6 @@ variable "Kubernetes.App.HealthCheck" {
     }
 }
 
-variable "Kubernetes.Deployment.Feed" {
-    value "Feeds-3976" {
-        description = "The feed ID hosting the image"
-    }
-}
-
 variable "Kubernetes.Deployment.Image" {
     value "octopussamples/ratings_service" {
         description = "The image to deploy"
@@ -76,4 +70,10 @@ variable "AWS.Account" {
     type = "AmazonWebServicesAccount"
 
     value "aws-account" {}
+}
+
+variable "Kubernetes.Deployment.Feed" {
+    value "docker-hub" {
+        description = "The feed ID hosting the image"
+    }
 }
