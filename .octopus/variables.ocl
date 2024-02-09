@@ -72,7 +72,7 @@ variable "Microservice.Name" {
     }
 }
 
-variable "Private.AWS.Account" {
+variable "AWS.Account" {
     type = "AmazonWebServicesAccount"
 
     value "aws-account" {}
