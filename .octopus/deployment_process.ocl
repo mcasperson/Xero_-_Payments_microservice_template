@@ -29,7 +29,156 @@ step "deploy-container" {
             Octopus.Action.EnabledFeatures = "Octopus.Features.KubernetesService,Octopus.Features.KubernetesIngress,Octopus.Features.KubernetesConfigMap,Octopus.Features.KubernetesSecret"
             Octopus.Action.Kubernetes.DeploymentTimeout = "180"
             Octopus.Action.Kubernetes.ResourceStatusCheck = "True"
-            Octopus.Action.KubernetesContainers.Containers = "[{\"Args\":[],\"Command\":[],\"ConfigMapEnvFromSource\":[],\"ConfigMapEnvironmentVariables\":[],\"CreateFeedSecrets\":\"False\",\"EnvironmentVariables\":[{\"key\":\"PORT\",\"keyError\":null,\"option\":\"\",\"option2\":\"\",\"option2Error\":null,\"optionError\":null,\"value\":\"#{Kubernetes.Deployment.Port}\",\"valueError\":null}],\"FieldRefEnvironmentVariables\":[],\"Lifecycle\":{\"PostStart\":null,\"PreStop\":null},\"LivenessProbe\":{\"exec\":{\"command\":[]},\"failureThreshold\":\"\",\"httpGet\":{\"host\":\"\",\"httpHeaders\":[],\"path\":\"\",\"port\":\"\",\"scheme\":\"\"},\"initialDelaySeconds\":\"\",\"periodSeconds\":\"\",\"successThreshold\":\"\",\"tcpSocket\":{\"host\":\"\",\"port\":\"\"},\"timeoutSeconds\":\"\",\"type\":\"\"},\"Name\":\"web\",\"Ports\":[{\"key\":\"web\",\"keyError\":null,\"option\":\"TCP\",\"option2\":\"\",\"option2Error\":null,\"optionError\":null,\"value\":\"#{Kubernetes.Deployment.Port}\",\"valueError\":null}],\"ReadinessProbe\":{\"exec\":{\"command\":[]},\"failureThreshold\":\"\",\"httpGet\":{\"host\":\"\",\"httpHeaders\":[],\"path\":\"\",\"port\":\"\",\"scheme\":\"\"},\"initialDelaySeconds\":\"\",\"periodSeconds\":\"\",\"successThreshold\":\"\",\"tcpSocket\":{\"host\":\"\",\"port\":\"\"},\"timeoutSeconds\":\"\",\"type\":\"\"},\"Resources\":{\"limits\":{\"amdGpu\":\"\",\"cpu\":\"\",\"ephemeralStorage\":\"\",\"memory\":\"\",\"nvidiaGpu\":\"\",\"storage\":\"\"},\"requests\":{\"amdGpu\":\"\",\"cpu\":\"\",\"ephemeralStorage\":\"\",\"memory\":\"\",\"nvidiaGpu\":\"\",\"storage\":\"\"}},\"SecretEnvFromSource\":[],\"SecretEnvironmentVariables\":[],\"SecurityContext\":{\"allowPrivilegeEscalation\":\"\",\"capabilities\":{\"add\":[],\"drop\":[\"ALL\"]},\"privileged\":\"\",\"readOnlyRootFilesystem\":\"\",\"runAsGroup\":\"\",\"runAsNonRoot\":\"True\",\"runAsUser\":\"\",\"seLinuxOptions\":{\"level\":\"\",\"role\":\"\",\"type\":\"\",\"user\":\"\"}},\"StartupProbe\":{\"exec\":{\"command\":[]},\"failureThreshold\":\"\",\"httpGet\":{\"host\":\"\",\"httpHeaders\":[],\"path\":\"\",\"port\":\"\",\"scheme\":\"\"},\"initialDelaySeconds\":\"\",\"periodSeconds\":\"\",\"successThreshold\":\"\",\"tcpSocket\":{\"host\":\"\",\"port\":\"\"},\"timeoutSeconds\":\"\",\"type\":\"\"},\"TerminationMessagePath\":\"\",\"TerminationMessagePolicy\":\"\",\"VolumeMounts\":[]}]"
+            Octopus.Action.KubernetesContainers.Containers = <<-EOT
+                [
+                 {
+                  "Name": "web",
+                  "Ports": [
+                   {
+                    "key": "web",
+                    "keyError": null,
+                    "option": "TCP",
+                    "option2": "",
+                    "option2Error": null,
+                    "optionError": null,
+                    "value": "#{Kubernetes.Deployment.Port}",
+                    "valueError": null
+                   }
+                  ],
+                  "EnvironmentVariables": [
+                   {
+                    "key": "PORT",
+                    "keyError": null,
+                    "option": "",
+                    "option2": "",
+                    "option2Error": null,
+                    "optionError": null,
+                    "value": "#{Kubernetes.Deployment.Port}",
+                    "valueError": null
+                   }
+                  ],
+                  "SecretEnvironmentVariables": [],
+                  "ConfigMapEnvironmentVariables": [],
+                  "FieldRefEnvironmentVariables": [],
+                  "ConfigMapEnvFromSource": [],
+                  "SecretEnvFromSource": [],
+                  "VolumeMounts": [],
+                  "Resources": {
+                   "limits": {
+                    "amdGpu": "",
+                    "cpu": "",
+                    "ephemeralStorage": "",
+                    "memory": "",
+                    "nvidiaGpu": "",
+                    "storage": ""
+                   },
+                   "requests": {
+                    "amdGpu": "",
+                    "cpu": "",
+                    "ephemeralStorage": "",
+                    "memory": "",
+                    "nvidiaGpu": "",
+                    "storage": ""
+                   }
+                  },
+                  "LivenessProbe": {
+                   "exec": {
+                    "command": []
+                   },
+                   "failureThreshold": "",
+                   "httpGet": {
+                    "host": "",
+                    "httpHeaders": [],
+                    "path": "",
+                    "port": "",
+                    "scheme": ""
+                   },
+                   "initialDelaySeconds": "",
+                   "periodSeconds": "",
+                   "successThreshold": "",
+                   "tcpSocket": {
+                    "host": "",
+                    "port": ""
+                   },
+                   "timeoutSeconds": "",
+                   "type": ""
+                  },
+                  "ReadinessProbe": {
+                   "exec": {
+                    "command": []
+                   },
+                   "failureThreshold": "",
+                   "httpGet": {
+                    "host": "",
+                    "httpHeaders": [],
+                    "path": "",
+                    "port": "",
+                    "scheme": ""
+                   },
+                   "initialDelaySeconds": "",
+                   "periodSeconds": "",
+                   "successThreshold": "",
+                   "tcpSocket": {
+                    "host": "",
+                    "port": ""
+                   },
+                   "timeoutSeconds": "",
+                   "type": ""
+                  },
+                  "StartupProbe": {
+                   "exec": {
+                    "command": []
+                   },
+                   "failureThreshold": "",
+                   "httpGet": {
+                    "host": "",
+                    "httpHeaders": [],
+                    "path": "",
+                    "port": "",
+                    "scheme": ""
+                   },
+                   "initialDelaySeconds": "",
+                   "periodSeconds": "",
+                   "successThreshold": "",
+                   "tcpSocket": {
+                    "host": "",
+                    "port": ""
+                   },
+                   "timeoutSeconds": "",
+                   "type": ""
+                  },
+                  "Command": [],
+                  "Args": [],
+                  "SecurityContext": {
+                   "allowPrivilegeEscalation": "",
+                   "capabilities": {
+                    "add": [],
+                    "drop": [
+                     "ALL"
+                    ]
+                   },
+                   "privileged": "",
+                   "readOnlyRootFilesystem": "",
+                   "runAsGroup": "",
+                   "runAsNonRoot": "True",
+                   "runAsUser": "",
+                   "seLinuxOptions": {
+                    "level": "",
+                    "role": "",
+                    "type": "",
+                    "user": ""
+                   }
+                  },
+                  "TerminationMessagePath": "",
+                  "TerminationMessagePolicy": "",
+                  "Lifecycle": {
+                   "PostStart": null,
+                   "PreStop": null
+                  },
+                  "CreateFeedSecrets": "False"
+                 }
+                ]
+                EOT
             Octopus.Action.KubernetesContainers.DeploymentName = "#{Kubernetes.Deployment.Name}"
             Octopus.Action.KubernetesContainers.DeploymentResourceType = "Deployment"
             Octopus.Action.KubernetesContainers.DeploymentStyle = "RollingUpdate"
@@ -56,7 +205,7 @@ step "deploy-container" {
 
         packages "web" {
             acquisition_location = "NotAcquired"
-            feed = "#{Kubernetes.Deployment.Feed}"
+            feed = "docker-hub"
             package_id = "#{Kubernetes.Deployment.Image}"
             properties = {
                 Extract = "False"
