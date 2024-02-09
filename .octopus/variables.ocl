@@ -71,9 +71,3 @@ variable "AWS.Account" {
 
     value "aws-account" {}
 }
-
-variable "Kubernetes.Deployment.Feed" {
-    value "docker-hub" {
-        description = "The feed ID hosting the image"
-    }
-}
