@@ -4,12 +4,6 @@ variable "Kubernetes.App.HealthCheck" {
     }
 }
 
-variable "Kubernetes.Deployment.Feed" {
-    value "Feeds-3976" {
-        description = "The feed ID hosting the image"
-    }
-}
-
 variable "Kubernetes.Deployment.Image" {
     value "octopussamples/ratings_service" {
         description = "The image to deploy"
@@ -76,16 +70,4 @@ variable "AWS.Account" {
     type = "AmazonWebServicesAccount"
 
     value "aws-account" {}
-}
-
-variable "Octopus.NewProject.Name" {
-    value "#{Octopus.Project.Name}" {
-        process = ["runbook/2-fork-and-deploy-project"]
-
-        prompt {
-            description = "The name of the new project"
-            label = ""
-            required = true
-        }
-    }
 }
