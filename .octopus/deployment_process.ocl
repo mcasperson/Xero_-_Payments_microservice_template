@@ -8,6 +8,7 @@ step "manual-intervention-required" {
             Octopus.Action.Manual.BlockConcurrentDeployments = "False"
             Octopus.Action.Manual.Instructions = "Do you approve this deployment?"
             Octopus.Action.Manual.ResponsibleTeamIds = "global/matthew"
+            Octopus.Action.RunOnServer = "false"
         }
     }
 }
@@ -18,11 +19,10 @@ step "generate-variables" {
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
                 Set-OctopusVariable -name "OctopusEnvironmentName" -value $OctopusParameters["Octopus.Environment.Name"]
                 
-                        EOT
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
         }
@@ -192,7 +192,7 @@ step "deploy-container" {
                   "CreateFeedSecrets": "False"
                  }
                 ]
-                    EOT
+                EOT
             Octopus.Action.KubernetesContainers.DeploymentName = "#{Kubernetes.Deployment.Name}"
             Octopus.Action.KubernetesContainers.DeploymentResourceType = "Deployment"
             Octopus.Action.KubernetesContainers.DeploymentStyle = "RollingUpdate"
@@ -207,7 +207,6 @@ step "deploy-container" {
             Octopus.Action.KubernetesContainers.ServiceNameType = "External"
             Octopus.Action.KubernetesContainers.ServicePorts = "[{\"name\":\"web\",\"nodePort\":\"\",\"port\":\"80\",\"protocol\":\"TCP\",\"targetPort\":\"web\"}]"
             Octopus.Action.KubernetesContainers.ServiceType = "ClusterIP"
-            Octopus.Action.RunOnServer = "true"
             OctopusUseBundledTooling = "False"
         }
         worker_pool = "hosted-ubuntu"
@@ -241,7 +240,6 @@ step "smoke-test" {
         environments = ["development", "test", "production", "feature-branch"]
         properties = {
             Octopus.Action.KubernetesContainers.Namespace = "#{Kubernetes.Namespace}"
-            Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
                 for i in {1..30}
                 do
@@ -279,7 +277,7 @@ step "smoke-test" {
                     exit 1
                 fi
                 
-                        EOT
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
             OctopusUseBundledTooling = "False"
@@ -299,7 +297,6 @@ step "security-scan" {
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
                 echo "Pulling Trivy Docker Image"
                 echo "##octopus[stdout-verbose]"
@@ -365,7 +362,7 @@ step "security-scan" {
                 
                 exit 0
                 
-                        EOT
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
@@ -380,11 +377,24 @@ step "feedback" {
     action {
         action_type = "Octopus.Script"
         properties = {
-            Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = "Write-Highlight \"Please share your feedback on this step in our GitHub discussion at [https://oc.to/CfiezA](https://oc.to/CfiezA).\""
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
         }
         worker_pool = "hosted-ubuntu"
+    }
+}
+
+step "run-a-script" {
+    name = "Run a Script"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.Script.ScriptBody = "echo \"hi\""
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+        }
+        worker_pool = "hosted-windows"
     }
 }
